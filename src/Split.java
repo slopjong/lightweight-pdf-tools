@@ -58,7 +58,7 @@ public class Split extends java.lang.Object
 							page = writer1.getImportedPage(reader, i);
 							rotation = reader.getPageRotation(i);
 							if (rotation == 90 || rotation == 270)
-								{cb1.addTemplate(page, 0, -1f, 1f, 0, 0, reader.getPageSizeWithRotation(i).height());}
+								{cb1.addTemplate(page, 0, -1f, 1f, 0, 0, reader.getPageSizeWithRotation(i).getHeight());}
 								else{cb1.addTemplate(page, 1f, 0, 0, 1f, 0, 0);}
 							document1.close();
 							}
@@ -100,7 +100,7 @@ public class Split extends java.lang.Object
 								page = writer1.getImportedPage(reader, i);
 								rotation = reader.getPageRotation(i);
 								if (rotation == 90 || rotation == 270)
-									{cb1.addTemplate(page, 0, -1f, 1f, 0, 0, reader.getPageSizeWithRotation(i).height());}
+									{cb1.addTemplate(page, 0, -1f, 1f, 0, 0, reader.getPageSizeWithRotation(i).getHeight());}
 									else{cb1.addTemplate(page, 1f, 0, 0, 1f, 0, 0);}
 								}
 							while (i < n)
@@ -111,7 +111,7 @@ public class Split extends java.lang.Object
 								page = writer2.getImportedPage(reader, i);
 								rotation = reader.getPageRotation(i);
 								if (rotation == 90 || rotation == 270)
-									{cb2.addTemplate(page, 0, -1f, 1f, 0, 0, reader.getPageSizeWithRotation(i).height());}
+									{cb2.addTemplate(page, 0, -1f, 1f, 0, 0, reader.getPageSizeWithRotation(i).getHeight());}
 									else{cb2.addTemplate(page, 1f, 0, 0, 1f, 0, 0);}
 								System.out.println("Processed page " + i);
 								}
