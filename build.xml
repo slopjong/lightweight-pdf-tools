@@ -1,28 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE project [<!ENTITY common SYSTEM "common.xml">]>
 
-<project name="pdf-tools" default="jar" basedir=".">
+<project name="pdf-tools" default="compile" basedir=".">
 	
-	<property name="src_dir" value="./src"/>
-	<property name="class_dir" value="./classes"/>
-	<property name="bin_dir" value="./bin"/>
+	<property name="src_dir" value="${basedir}/src"/>
+	<property name="bin_dir" value="${basedir}/bin"/>
+	<property name="lib_dir" value="${basedir}/lib"/>
+	<property name="script_dir" value="${basedir}/scripts"/>
+	
 	<property name="jar_name" value="pdf-tools.jar"/>
-
-	<target name="jar" depends="compile">
-		<copy todir="${class_dir}">
-			<fileset dir="${src_dir}" excludes="**/*.java"/>
-		</copy>
-		<jar jarfile="${bin_dir}/${jar_name}" basedir="${class_dir}" />
-	</target>
+	<property name="itext_version" value="5.1.3"/>
 
 	<target name="compile" depends="clean">
-		<javac srcdir="${src_dir}" destdir="${class_dir}" source="1.6" target="1.6" fork="true" classpath="/usr/share/java/itextpdf.jar"/>
+	
+		<!-- compile and package -->
+		<javac srcdir="${src_dir}" source="1.6" target="1.6" fork="true" classpath="${lib_dir}/itextpdf/itextpdf-${itext_version}.jar"/>
+		<mkdir dir="${bin_dir}"/>
+		<jar jarfile="${bin_dir}/${jar_name}" basedir="${src_dir}" />
+		
+		<!-- copy the linux scripts to bin -->
+		<copy file="${script_dir}/pdfjoin-linux" todir="${bin_dir}"/>
+		<copy file="${script_dir}/pdfsplit-linux" todir="${bin_dir}"/>
+		
+		<!-- rename the files -->
+		<move file="${bin_dir}/pdfjoin-linux" tofile="${bin_dir}/pdfjoin" />
+		<move file="${bin_dir}/pdfsplit-linux" tofile="${bin_dir}/pdfsplit" />
 	</target>
 
 	<target name="clean">
-		<delete dir="${class_dir}"/>
-		<mkdir dir="${class_dir}"/>
-		<delete file="${bin_dir}/${jar_name}"/>
+		<delete dir="${bin_dir}"/>
 		<delete file="${src_dir}/Concat.class"/>
 		<delete file="${src_dir}/Split.class"/>
 	</target>
