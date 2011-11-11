@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project [<!ENTITY common SYSTEM "common.xml">]>
+
+<project name="pdf-tools" default="jar" basedir=".">
+	
+	<property name="src_dir" value="./src"/>
+	<property name="class_dir" value="./classes"/>
+	<property name="bin_dir" value="./bin"/>
+	<property name="jar_name" value="pdf-tools.jar"/>
+
+	<target name="jar" depends="compile">
+		<copy todir="${class_dir}">
+			<fileset dir="${src_dir}" excludes="**/*.java"/>
+		</copy>
+		<jar jarfile="${bin_dir}/${jar_name}" basedir="${class_dir}" />
+	</target>
+
+	<target name="compile" depends="clean">
+		<javac srcdir="${src_dir}" destdir="${class_dir}" source="1.6" target="1.6" fork="true" classpath="/usr/share/java/itextpdf.jar"/>
+	</target>
+
+	<target name="clean">
+		<delete dir="${class_dir}"/>
+		<mkdir dir="${class_dir}"/>
+		<delete file="${bin_dir}/${jar_name}"/>
+		<delete file="${src_dir}/Concat.class"/>
+		<delete file="${src_dir}/Split.class"/>
+	</target>
+	
+</project>
