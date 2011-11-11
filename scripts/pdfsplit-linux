@@ -1,0 +1,3 @@
+#!/bin/sh
+
+java -cp ../lib/itextpdf/itextpdf-5.1.3.jar:pdf-tools.jar Split "$@"
