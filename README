@@ -1,0 +1,3 @@
+Combines multiple pdf files to one single file. It depends on the itext pdf manipulating library.
+
+joinpdf was originally written by Mark Thompson but it seems no longer being maintained. The original code used the old version of itext which differed in the package name.
