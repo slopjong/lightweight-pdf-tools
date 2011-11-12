@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE project [<!ENTITY common SYSTEM "common.xml">]>
 
-<project name="pdf-tools" default="compile" basedir=".">
+<project name="pdf-tools" default="linux" basedir=".">
 	
 	<property name="src_dir" value="${basedir}/src"/>
 	<property name="bin_dir" value="${basedir}/bin"/>
@@ -11,20 +11,50 @@
 	<property name="jar_name" value="pdf-tools.jar"/>
 	<property name="itext_version" value="5.1.3"/>
 
+	<!-- default compile target (yet linux-only) -->
 	<target name="compile" depends="clean">
-	
 		<!-- compile and package -->
 		<javac srcdir="${src_dir}" source="1.6" target="1.6" fork="true" classpath="${lib_dir}/itextpdf/itextpdf-${itext_version}.jar"/>
 		<mkdir dir="${bin_dir}"/>
 		<jar jarfile="${bin_dir}/${jar_name}" basedir="${src_dir}" />
-		
+		<!--
+		<condition property="isWindows" value="true">
+			<os family="windows" />
+		</condition>
+
+		<condition property="isLinux" value="true">
+			<os family="unix" />
+		</condition>
+		-->
+	</target>
+
+	<target name="windows" depends="compile">
+		<!-- copy the windows batch files to bin -->
+	</target>
+	
+	<target name="linux" depends="compile">
 		<!-- copy the linux scripts to bin -->
-		<copy file="${script_dir}/pdfjoin-linux" todir="${bin_dir}"/>
-		<copy file="${script_dir}/pdfsplit-linux" todir="${bin_dir}"/>
-		
-		<!-- rename the files -->
-		<move file="${bin_dir}/pdfjoin-linux" tofile="${bin_dir}/pdfjoin" />
-		<move file="${bin_dir}/pdfsplit-linux" tofile="${bin_dir}/pdfsplit" />
+		<exec executable="cp">
+			<arg value="${script_dir}/joinpdf-linux" />
+			<arg value="${bin_dir}/joinpdf" />
+		</exec>
+		<exec executable="cp">
+			<arg value="${script_dir}/splitpdf-linux" />
+			<arg value="${bin_dir}/splitpdf" />
+		</exec>
+	</target>
+
+	<!-- compile target for linux package managers -->
+	<target name="linux-package" depends="compile">
+		<!-- copy the linux scripts to bin -->
+		<exec executable="cp">
+			<arg value="${script_dir}/joinpdf-linux-package-manager" />
+			<arg value="${bin_dir}/joinpdf" />
+		</exec>
+		<exec executable="cp">
+			<arg value="${script_dir}/splitpdf-linux-package-manager" />
+			<arg value="${bin_dir}/splitpdf" />
+		</exec>
 	</target>
 
 	<target name="clean">
