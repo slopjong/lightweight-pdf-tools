@@ -16,7 +16,7 @@
 		<!-- compile and package -->
 		<javac srcdir="${src_dir}" source="1.6" target="1.6" fork="true" classpath="${lib_dir}/itextpdf/itextpdf-${itext_version}.jar"/>
 		<mkdir dir="${bin_dir}"/>
-		<jar jarfile="${bin_dir}/${jar_name}" basedir="${src_dir}" />
+		<jar jarfile="${lib_dir}/${jar_name}" basedir="${src_dir}" />
 		<!--
 		<condition property="isWindows" value="true">
 			<os family="windows" />
@@ -59,6 +59,7 @@
 
 	<target name="clean">
 		<delete dir="${bin_dir}"/>
+		<delete file="${lib_dir}/pdf-tools.jar"/>
 		<delete file="${src_dir}/Concat.class"/>
 		<delete file="${src_dir}/Split.class"/>
 	</target>
