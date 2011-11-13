@@ -32,6 +32,10 @@
 		<!-- copy the windows batch files to bin -->
 	</target>
 	
+	<target name="mac" depends="linux">
+		<!-- Do nothing. The mac target is compatible with linux. -->
+	</target>
+	
 	<target name="linux" depends="compile">
 		<!-- copy the linux scripts to bin -->
 		<exec executable="cp">
