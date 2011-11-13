@@ -1,9 +1,1 @@
-Combines multiple pdf files to one single file. It depends on the itext pdf manipulating library.
-
-joinpdf was originally written by Mark Thompson but it seems no longer being maintained. The original code used the old version of itext which differed in the package name.
-
-Install the itext library from your package manager or fetch it from http://itext.sourceforge.net
-
-[Compile] 
-
-  javac -classpath /usr/share/java/itextpdf.jar *.java
+Combine multiple pdf files to one output pdf or extract pages from a certain pdf file.
