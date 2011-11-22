@@ -18,6 +18,12 @@
  * This class demonstrates how to splot a PDF file using iText.
  * @author Bruno Lowagie
  */
+ 
+/**
+ * This class was updated to the newest itextpdf version by
+ * @author Romain Schmitz
+ * @year 2011
+ */
 
 import java.io.*;
 

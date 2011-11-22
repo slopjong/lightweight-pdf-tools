@@ -18,6 +18,12 @@
  * This class demonstrates copying a PDF file using iText.
  * @author Mark Thompson
  */
+ 
+/**
+ * This class was updated to the newest itextpdf version by
+ * @author Romain Schmitz
+ * @year 2011
+ */ 
 
 import java.io.*;
 
@@ -34,7 +40,6 @@ public class Concat {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-	System.out.println("Test");
 	    
         if (args.length < 2) {
             System.err.println("arguments: file1 [file2 ...] destfile");
@@ -48,7 +53,6 @@ public class Concat {
                 Document document = null;
                 PdfCopy  writer = null;
                 
-                //*
                 for(int f=0; f < args.length-1; f++) {
                 
                     // we create a reader for a certain document
@@ -94,7 +98,6 @@ public class Concat {
                     
                 // step 5: we close the document
                 document.close();
-                //*/
             }
             catch(Exception e) {
                 e.printStackTrace();
