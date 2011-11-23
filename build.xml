@@ -14,7 +14,7 @@
 	<!-- default compile target (yet linux-only) -->
 	<target name="compile" depends="clean">
 		<!-- compile and package -->
-		<javac srcdir="${src_dir}" source="1.6" target="1.6" fork="true" classpath="${lib_dir}/itextpdf/itextpdf-${itext_version}.jar"/>
+		<javac srcdir="${src_dir}" fork="true" classpath="${lib_dir}/itextpdf/itextpdf-${itext_version}.jar"/>
 		<mkdir dir="${bin_dir}"/>
 		<jar jarfile="${lib_dir}/${jar_name}" basedir="${src_dir}" />
 		<!--
