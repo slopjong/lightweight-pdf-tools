@@ -1,0 +1,55 @@
+# Maintainer: Romain Schmitz <slopjong [[at]] hackerspace [[dot]] lu>
+pkgname=pdf-tools
+pkgver=20111123
+pkgrel=1
+pkgdesc="Java-based toolkit with basic join and split features."
+arch=('i686' 'x86_64')
+license=('GPL')
+depends=('java-runtime' 'itext')
+makedepends=('git' 'apache-ant')
+conflicts=('joinpdf')
+provides=('joinpdf')
+changelog=${pkgname}.changelog
+source=()
+md5sums=()
+
+_gitroot="git://github.com/slopjong/pdf-tools.git"
+_gitname="pdf-tools"
+
+build() {
+
+  cd "$srcdir"
+  msg "Connecting to github.com..."
+
+  if [ -d ${srcdir}/${_gitname} ] ; then
+    cd ${_gitname} && git pull origin master
+    msg "The local files are updated."
+  else
+    git clone --depth 1 ${_gitroot}
+    cd ${_gitname} && git checkout tags/v0.1
+  fi
+
+  msg "GIT checkout done or server timeout"
+  msg "Now build ..."  
+
+  ant linux-package
+}
+
+package() {    
+  # prepare the fake filesystem
+  mkdir -p ${pkgdir}/usr/{bin,share/{java,doc/${pkgname},man/man1}}
+        
+  # install the wrapper scripts in /usr/bin
+  cp ${srcdir}/${pkgname}/bin/joinpdf ${pkgdir}/usr/bin
+  cp ${srcdir}/${pkgname}/bin/splitpdf ${pkgdir}/usr/bin
+  
+  # install the pdf-tools jar
+  cp ${srcdir}/${pkgname}/lib/pdf-tools.jar ${pkgdir}/usr/share/java
+  
+  # install the manpages
+  gzip -9 ${srcdir}/${pkgname}/doc/joinpdf.1
+  gzip -9 ${srcdir}/${pkgname}/doc/splitpdf.1
+  cp ${srcdir}/${pkgname}/doc/*.1.gz ${pkgdir}/usr/share/man/man1
+}
+
+# vim:set ts=2 sw=2 et:
