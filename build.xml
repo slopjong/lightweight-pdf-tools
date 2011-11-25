@@ -66,6 +66,8 @@
 		<delete file="${lib_dir}/pdf-tools.jar"/>
 		<delete file="${src_dir}/Concat.class"/>
 		<delete file="${src_dir}/Split.class"/>
+		<delete file="${src_dir}/Rotate.class"/>
+		<delete file="${src_dir}/Scale.class"/>
 	</target>
 	
 </project>
