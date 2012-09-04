@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE project [<!ENTITY common SYSTEM "common.xml">]>
 
-<project name="pdf-tools" default="linux" basedir=".">
+<project name="lightweight-pdf-tools" default="linux" basedir=".">
 	
 	<property name="src_dir" value="${basedir}/src"/>
 	<property name="bin_dir" value="${basedir}/bin"/>
 	<property name="lib_dir" value="${basedir}/lib"/>
 	<property name="script_dir" value="${basedir}/scripts"/>
 	
-	<property name="jar_name" value="pdf-tools.jar"/>
-	<property name="itext_version" value="5.1.3"/>
+	<property name="jar_name" value="${ant.project.name}.jar"/>
 
 	<!-- default compile target (yet linux-only) -->
 	<target name="compile" depends="clean">
 		<!-- compile and package -->
-		<javac srcdir="${src_dir}" fork="true" classpath="${lib_dir}/itextpdf/itextpdf-${itext_version}.jar"/>
+		<javac srcdir="${src_dir}" fork="true" classpath="${lib_dir}/itextpdf/itextpdf.jar"/>
 		<mkdir dir="${bin_dir}"/>
 		<jar jarfile="${lib_dir}/${jar_name}" basedir="${src_dir}" />
 		<!--
@@ -63,7 +62,7 @@
 
 	<target name="clean">
 		<delete dir="${bin_dir}"/>
-		<delete file="${lib_dir}/pdf-tools.jar"/>
+		<delete file="${lib_dir}/${jar_name}.jar"/>
 		<delete file="${src_dir}/Concat.class"/>
 		<delete file="${src_dir}/Split.class"/>
 		<delete file="${src_dir}/Rotate.class"/>
