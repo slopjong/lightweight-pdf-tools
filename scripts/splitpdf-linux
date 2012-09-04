@@ -1,4 +1,4 @@
- #!/bin/bash
+#!/bin/bash
 
 case "$(uname)" in
 	Linux)
@@ -15,4 +15,4 @@ MY_PATH=`${READLINK} -f $0`
 MY_PATH=`dirname $MY_PATH`
 LIB_PATH=${MY_PATH}/../lib
 
-java -cp ${LIB_PATH}/itextpdf/itextpdf-5.1.3.jar:${LIB_PATH}/pdf-tools.jar Split "$@"
+java -cp ${LIB_PATH}/itextpdf/itextpdf.jar:${LIB_PATH}/lightweight-pdf-tools.jar Split "$@"
